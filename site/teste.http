@@ -1,0 +1,20 @@
+GET http://localhost:3000/
+
+###
+
+GET http://localhost:3000/dados
+
+
+### 
+POST http://localhost:3000/dados
+Content-type: application/json
+
+{
+    "atividade": "prova",
+    "materia": "Programação",
+    "data": "2023-04-18"
+}
+
+###
+
+DELETE http://localhost:3000/dados?id=1
