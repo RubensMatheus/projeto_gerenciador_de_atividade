@@ -10,9 +10,9 @@ POST http://localhost:3000/dados
 Content-type: application/json
 
 {
-    "atividade": "prova",
-    "materia": "Programação",
-    "data": "2023-04-18"
+    "atividade": "teste",
+    "materia": "cálculo",
+    "data": "2023-04-25"
 }
 
 ###
