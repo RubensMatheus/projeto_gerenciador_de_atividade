@@ -14,7 +14,7 @@
         <input type="text" id="atividade" placeholder="Atividade:" autofocus>
         <input type="text" id="descricao" placeholder="Matéria:" autofocus>
         <input type="date" name="data" id="data" >
-        <input type="submit" id="submit" placeholder="Adicionar">
+        <input type="submit" id="submit" value="Adicionar">
     </form>
 
     <br></br>
@@ -22,7 +22,7 @@
     <form>
         <label for="numero">Coloque o id para exluir</label>
         <input type="number" id="numero" name="numero">
-        <button id="botao">Excluir</button>
+        <input type="submit" id="delet" value="Excluir">
     </form>
     <br></br>      
 
@@ -41,19 +41,64 @@
                 <td><%=dados.dataValues.id%></td>
             </tr>
         <% }) %>
-        <tr>
-          <td>Prova</td>
-          <td>FMC1</td>
-          <td>18-04-2023</td>
-        </tr>
-        <tr>
-          <td>Trabalho</td>
-          <td>Programação</td>
-          <td>20-04-2023</td>
-        </tr>
       </table>
     </div>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-    <!-- <script src="externo.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        $("#submit").on("click", function () {
+          let a = $("#atividade").val()
+          let b = $("#descricao").val()
+          let c = $('input[type="date"]').val()
+
+          let dado ={
+            atividade: a,
+            materia: b,
+            data: c
+          } 
+
+          json = JSON.stringify(dado);
+          console.log(`Botão de envio clicado! ${json}`);
+
+          fetch('http://localhost:3000/dados', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dado)
+          })
+          .then(function(response) {
+              console.log(response)
+          })
+          .then(data =>console.log(data))
+          .catch(error => console.error(error))
+          });
+      });
+
+      $(function() {
+        $('#delet').on('click', function(){
+          let d = $('#numero').val()
+          let dado = {
+            id: d
+          }
+          json = JSON.stringify(dado);
+          console.log(`Botão de envio clicado! ${json}`);
+
+          fetch('http://localhost:3000/dados', {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dado)
+          })
+          .then(function(response) {
+              console.log(response)
+          })
+          .then(data =>console.log(data))
+          .catch(error => console.error(error))
+          });
+      })
+      
+    </script>
 </body>
 </html>

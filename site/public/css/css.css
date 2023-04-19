@@ -8,7 +8,7 @@ h1 {
     color: blueviolet;
 }
 
-#submit {
+#submit, #delet {
     background-color: lightcoral;
     width: 100px;
 }
@@ -47,11 +47,6 @@ label {
     font-family: Arial, Helvetica, sans-serif;
     color: black;
     margin-right: 5px;
-}
-
-#botao {
-    background-color: lightcoral;
-    width: 100px;
 }
 
 .container {

@@ -11,10 +11,9 @@ router.get('/', async (req, res) => {
         //    model: atividade
         // }], raw: true, nest: true
     })
-    //console.log(atividade)
-    // console.log('\n')
+
     const atvResult = atividade.map((atv) => prepararResultado(atv))
-    console.log(atvResult)
+    //console.log(atvResult)
     res.render('pages/index', {atividades: atvResult})
 
 })

@@ -15,28 +15,24 @@ app.get('/dados', async function(req, res) {
     res.json({atividades: atividade})
 });
 
-// app.get('/dados/:id', async (req, res) => {
-//     const atividade = await Atividades.findByPk(req.params.id)
-//     res.json({atividades: atividade})
-// })
-
 app.post('/dados', async (req, res) => {
+    //console.log(req.body)
     const atividades = await Atividades.create(req.body)
-    const insertedId = atividades.id;
-    const atividade = await Atividades.findByPk(insertedId)
-    res.json({atividades: atividade})
+    //console.log(atividades)
+    res.json({atividades: atividades})
 })
 
-// app.delete('/dados', async (req, res) => {
-//     const id = req.query.id
-//     const atividade = await Atividades.findByPk(id)
-//     if (atividade){
-//         await atividade.destroy()
-//         res.json({msg: "Atividadet deletada com sucesso!"})
-//     }else{
-//         res.status(400).json({msg: "Atividade não encontrado!"})
-//     }
-// })
+app.delete('/dados', async (req, res) => {
+    const id = req.body.id
+    console.log(id)
+    const atividades = await Atividades.findByPk(id)
+    if (atividades){
+        await atividades.destroy()
+        res.json({msg: "Atividadet deletada com sucesso!"})
+    }else{
+        res.status(400).json({msg: "Atividade não encontrado!"})
+    }
+})
 
 app.listen(3000, function() {
   console.log('Aplicativo da web rodando na porta 3000!');
