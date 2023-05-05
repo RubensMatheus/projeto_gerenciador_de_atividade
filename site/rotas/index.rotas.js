@@ -6,11 +6,7 @@ const moment = require('moment')
 moment.locale('tp-br')
 
 router.get('/', async (req, res) => {
-    const atividade = await Atividades.findAll({
-        // include: [{
-        //    model: atividade
-        // }], raw: true, nest: true
-    })
+    const atividade = await Atividades.findAll({})
 
     const atvResult = atividade.map((atv) => prepararResultado(atv))
     //console.log(atvResult)
@@ -21,10 +17,10 @@ router.get('/', async (req, res) => {
 function prepararResultado(atv){
 
     const result = Object.assign({}, atv)
-    result.novadata = moment(new Date(result.dataValues.data)).add(10, 'days').calendar()
+    result.novadata = moment(new Date(result.dataValues.data)).format('L')
 
-    if (result.createdAt) delete result.createdAt
-    if (result.updatedAt) delete result.updatedAt
+    if (result.dataValues.createdAt) delete result.dataValues.createdAt
+    if (result.dataValues.updatedAt) delete result.dataValues.updatedAt
     
     return result
 }
